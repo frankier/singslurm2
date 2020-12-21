@@ -1,0 +1,6 @@
+[submodule "singreqrun"]
+	path = singreqrun
+	url = https://github.com/frankier/singreqrun.git
+[submodule "slurm-profile"]
+	path = slurm-profile
+	url = https://github.com/Snakemake-Profiles/slurm.git
