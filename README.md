@@ -15,13 +15,13 @@ First perform a **recursive** clone of this repository:
 Then it can be run using `~/singslurm2/run.sh`. Arguments are passed
 using environment variables:
 
- * $SIF_PATH: Path to Singularity SIF file for everything -- the Snakemake
+ * `$SIF_PATH`: Path to Singularity SIF file for everything -- the Snakemake
    control job and the execution jobs on the cluster
- * $SNAKEFILE: Path within container to directory containing Snakefile
- * $CLUSC_CONF: Path within container to file mapping rules to resource requirements
- * $TRACE: Trace this script
- * $SBATCH_DEFAULTS: Default arguments to pass to sbatch
- * $NUM_JOBS: Max jobs at the Snakemake level. Each may include many SLURM tasks. 128 by default.
+ * `$SNAKEFILE`: Path within container to directory containing Snakefile
+ * `$CLUSC_CONF`: Path within container to file mapping rules to resource requirements
+ * `$TRACE`: Trace this script
+ * `$SBATCH_DEFAULTS`: Default arguments to pass to sbatch
+ * `$NUM_JOBS`: Max jobs at the Snakemake level. Each may include many SLURM tasks. 128 by default.
 
 Anything passed as an actual arguments to `run.sh` will be passed to
 Snakemake within the container.
