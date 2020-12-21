@@ -1,4 +1,4 @@
-# singslurm
+# singslurm2 = Snakemake + Singularity + SLURM
 
 This profile configures Snakemake installed within a Singularity container to run on the [SLURM Workload Manager](https://slurm.schedmd.com/)
 
