@@ -23,7 +23,8 @@ using environment variables:
  * $SBATCH_DEFAULTS: Default arguments to pass to sbatch
  * $NUM_JOBS: Max jobs at the Snakemake level. Each may include many SLURM tasks. 128 by default.
 
-Its actual arguments will be passed to Snakemake within the container.
+Anything passed as an actual arguments to `run.sh` will be passed to
+Snakemake within the container.
 
 If you want to run the control job a cluster node, rather than a login node,
 just put your environment variable arguments and execution of
