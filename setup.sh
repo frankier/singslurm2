@@ -6,20 +6,34 @@ cp -r \
 cd slurmprofile
 
 # Patch out cookiecutter stuff and replace with import
+# TODO: Support cluster_name
 awk '
 /cookiecutter/ { inCc = 1 }
-inBlock {
-    if ( /cookiecutter/ ) {
-        next
+inCc {
+    if ( /RESOURCE_MAPPING/ ) {
+        print("from config import SBATCH_DEFAULTS, CLUSTER_CONFIG, ADVANCED_ARGUMENT_CONVERSION\n")
+        inCc = 0
     }
     else {
-        print("from config import SBATCH_DEFAULTS, CLUSTER_CONFIG, ADVANCED_ARGUMENT_CONVERSION\n")
-        inBlock = 0
+        next
     }
 }
 { print }
 ' slurm-submit.py > tmp && \
   cat tmp > slurm-submit.py && \
+  rm tmp
+ 
+awk '
+/{% if cookiecutter.cluster_name %}/ { inCc = 1 }
+inCc {
+    if ( /{% endif %}/ ) {
+        inCc = 0
+    }
+    next
+}
+{ print }
+' slurm-status.py > tmp && \
+  cat tmp > slurm-status.py && \
   rm tmp
 
 # Configure via environment variables instead of cookiecutter
