@@ -19,7 +19,8 @@ inBlock {
 }
 { print }
 ' slurm-submit.py > tmp && \
-  mv tmp slurm-submit.py
+  cat tmp > slurm-submit.py && \
+  rm tmp
 
 # Configure via environment variables instead of cookiecutter
 cat << CONFIGPY > config.py
