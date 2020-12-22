@@ -54,4 +54,8 @@ JOBSCRIPT
 
 chmod +x slurm-jobscript.sh
 
+# Symlink req_run.py so that it used instead of subprocess.py
+
+ln -s $SCRIPTPATH/req_run.py slurmprofile/subprocess.py
+
 cd ..
