@@ -1,5 +1,5 @@
 snakemake \
   -j$NUM_JOBS \
-  --profile $tmp_dir/slurmprofile \
+  --profile $TMP_DIR/slurmprofile \
   --snakefile $SNAKEFILE \
   $@
