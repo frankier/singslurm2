@@ -27,7 +27,7 @@ awk '
 /{% if cookiecutter.cluster_name %}/ { inCc = 1 }
 inCc {
     if ( /{% endif %}/ ) {
-        print("cluster = ''\n")
+        print("cluster = \047\047\n")
         inCc = 0
     }
     next
