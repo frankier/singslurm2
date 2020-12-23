@@ -36,7 +36,7 @@ inCc {
   cat tmp > slurm-status.py && \
   rm tmp
 
-grep -i \
+sed -i \
   's/import subprocess /import fake_subprocess /g' \
   slurm-status.py \
   slurm_utils.py
