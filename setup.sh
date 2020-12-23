@@ -36,6 +36,11 @@ inCc {
   cat tmp > slurm-status.py && \
   rm tmp
 
+grep -i \
+  's/import subprocess /import fake_subprocess /g' \
+  slurm-status.py \
+  slurm_utils.py
+
 # Configure via environment variables instead of cookiecutter
 cat << CONFIGPY > config.py
 SBATCH_DEFAULTS = "$SBATCH_DEFAULTS"
@@ -57,6 +62,6 @@ chmod +x slurm-jobscript.sh
 # Symlink req_run.py so that it used instead of subprocess.py
 
 ln -s $SCRIPTPATH/req_run.py .
-ln -s $SCRIPTPATH/fake_subprocess.py subprocess.py
+ln -s $SCRIPTPATH/fake_subprocess.py .
 
 cd ..
