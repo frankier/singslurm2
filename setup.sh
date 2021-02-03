@@ -38,7 +38,7 @@ inCc {
   rm tmp
 
 sed -i \
-  's/import subprocess /import sys; import os; sys.path.insert(0, os.path.dirname(__file__)); import fake_subprocess /g' \
+  's/import subprocess /import fake_subprocess /g' \
   slurm-status.py \
   slurm_utils.py
 
@@ -62,7 +62,7 @@ chmod +x slurm-jobscript.sh
 
 # Symlink req_run.py so that it used instead of subprocess.py
 
-ln -s $SCRIPTPATH/req_run.py .
-ln -s $SCRIPTPATH/fake_subprocess.py .
+cp $SCRIPTPATH/req_run.py .
+cp $SCRIPTPATH/fake_subprocess.py .
 
 cd ..
