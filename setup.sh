@@ -38,7 +38,7 @@ inCc {
   rm tmp
 
 sed -i \
-  's/import subprocess /import fake_subprocess /g' \
+  's/import subprocess /import sys; sys.path.insert(0, ""); import fake_subprocess /g' \
   slurm-status.py \
   slurm_utils.py
 
