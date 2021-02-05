@@ -49,6 +49,16 @@ CLUSTER_CONFIG = "$CLUSC_CONF"
 ADVANCED_ARGUMENT_CONVERSION = False
 CONFIGPY
 
+# Also allow some config.yaml options to be specified with environment
+# variables
+if [[ -n "$RESTART_TIMES" ]]; then
+  sed -i "s/restart-times:.*/restart-times: $RESTART_TIMES/" config.yaml
+fi
+
+if [[ -n "$LATENCY_WAIT" ]]; then
+  sed -i "s/latency-wait:.*/latency-wait: $LATENCY_WAIT/" config.yaml
+fi
+
 # Modify job starting script to use Singularity
 cat << JOBSCRIPT > slurm-jobscript.sh
 #!/bin/bash
