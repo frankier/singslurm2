@@ -63,6 +63,10 @@ fi
 cat << JOBSCRIPT > slurm-jobscript.sh
 #!/bin/bash
 # properties = {properties}
+if [[ -n "\$PRE_JOB_SCRIPT" ]]; then
+  eval "\$PRE_JOB_SCRIPT"
+fi
+
 cat << EXECJOB | singularity shell $SING_EXTRA_ARGS --nv $SIF_PATH 
 {exec_job}
 EXECJOB
