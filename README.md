@@ -32,6 +32,16 @@ just put your environment variable arguments and execution of
 
     $ sbatch --time 5-00:00:00 ./run_myproj.sh
 
+## Customisation for different cluster environments
+
+Some cluster computing environments have different directory layouts for where
+project and scratch data are stored. You can customise `$SING_EXTRA_ARGS` at
+the last moment -- when environment variables are pointing at the correct
+places `` using `$PRE_COORDINATOR_SCRIPT` and `$PRE_JOB_SCRIPT`. You can then
+source this in your job script `./run_myproj.sh`. An example of this for CSC is
+available in `contrib/csc.sh`. To use it you would add for example
+`/path/to/contrib/csc.sh` to the beginning of all your job scripts.
+
 ## More information
 
 More information can be found from [the SLURM Snakemake
