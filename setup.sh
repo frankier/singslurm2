@@ -5,45 +5,14 @@ cp -r \
 
 cd slurmprofile
 
-# Patch out cookiecutter stuff and replace with import
-# TODO: Support cluster_name
-awk '
-/cookiecutter/ { inCc = 1 }
-inCc {
-    if ( /RESOURCE_MAPPING/ ) {
-        print("from config import SBATCH_DEFAULTS, CLUSTER_CONFIG, ADVANCED_ARGUMENT_CONVERSION\n")
-        inCc = 0
-    }
-    else {
-        next
-    }
-}
-{ print }
-' slurm-submit.py > tmp && \
-  cat tmp > slurm-submit.py && \
-  rm tmp
- 
-awk '
-/{% if cookiecutter.cluster_name %}/ { inCc = 1 }
-inCc {
-    if ( /{% endif %}/ ) {
-        print("cluster = \047\047\n")
-        inCc = 0
-    }
-    next
-}
-{ print }
-' slurm-status.py > tmp && \
-  cat tmp > slurm-status.py && \
-  rm tmp
-
 sed -i \
   's/import subprocess /import fake_subprocess /g' \
   slurm-status.py \
   slurm_utils.py
 
 # Configure via environment variables instead of cookiecutter
-cat << CONFIGPY > config.py
+cat << CONFIGPY > cookiecutter_settings.py
+CLUSTER_NAME = "$CLUSTER_NAME"
 SBATCH_DEFAULTS = "$SBATCH_DEFAULTS"
 CLUSTER_CONFIG = "$CLUSC_CONF"
 ADVANCED_ARGUMENT_CONVERSION = False
