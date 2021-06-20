@@ -11,12 +11,14 @@ sed -i \
   slurm_utils.py
 
 # Configure via environment variables instead of cookiecutter
-cat << CONFIGPY > cookiecutter_settings.py
-CLUSTER_NAME = "$CLUSTER_NAME"
-SBATCH_DEFAULTS = "$SBATCH_DEFAULTS"
-CLUSTER_CONFIG = "$CLUSC_CONF"
-ADVANCED_ARGUMENT_CONVERSION = False
-CONFIGPY
+cat << SETTINGSJSON > settings.json
+{
+    "SBATCH_DEFAULTS": "$SBATCH_DEFAULTS",
+    "CLUSTER_NAME": "$CLUSTER_NAME",
+    "CLUSTER_CONFIG": "$CLUSTER_CONFIG",
+    "ADVANCED_ARGUMENT_CONVERSION": "no"
+}
+SETTINGSJSON
 
 # Also allow some config.yaml options to be specified with environment
 # variables
