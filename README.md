@@ -58,7 +58,7 @@ Some cluster computing environments have different directory layouts. They
 might for example have separate project and scratch data directory trees. In
 some cases, scratch directories are only available on SLURM job nodes. You can
 use `$PRE_COORDINATOR_SCRIPT` and `$PRE_JOB_SCRIPT` to customise things, for
-example `--bind`` within `$SING_EXTRA_ARGS` at the last moment, within the
+example `--bind` within `$SING_EXTRA_ARGS` at the last moment, within the
 correct environment with the directories and environment variables pointing at
 them available.
 
