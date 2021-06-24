@@ -38,7 +38,7 @@ environment variables. Compulsory arguments are shown in **bold**:
      concluding it has failed. 30 by default.
  * Other options:
    * `$TRACE`: Trace the script -- useful for debugging
-   * `PRE_COORDINATOR_SCRIPT` and `PRE_JOB_SCRIPT`: script fragments, typically
+   * `$PRE_COORDINATOR_SCRIPT` and `$PRE_JOB_SCRIPT`: script fragments, typically
      setting or modifying environment variables, which will run at the
      beginning of the coordinator and job processes respectively. See
      *Customisation for different cluster environments* for typical usage.
