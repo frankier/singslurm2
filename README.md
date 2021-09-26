@@ -64,10 +64,11 @@ them available.
 
 A typical usage might be to put this cluster specific setup into a script,
 which you then source this in your job running script i.e. put `source
-~/myclustersetup.sh` at the top of `run_myproj.sh`. An example of this for CSC,
-the Finnish national HPC provider, is available in `contrib/csc.sh`. This might
-be useful as a starting point for other providers. To use it you would add for
-example `/path/to/contrib/csc.sh` to the beginning of all your job scripts.
+~/myclustersetup.sh` at the top of `run_myproj.sh`. Examples for CSC (national
+Finnish HPC provider) are available in `contrib/csc_mahti.sh` and
+`contrib/csc_puhti.sh`. This might be useful as a starting point for other
+providers. To use it you would add for example `/path/to/contrib/csc.sh` to the
+beginning of all your job scripts.
 
 ## More information
 
