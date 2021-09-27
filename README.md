@@ -27,8 +27,10 @@ environment variables. Compulsory arguments are shown in **bold**:
  * Options relating only to Snakemake:
    * **`$SNAKEFILE`**: Path within container to directory containing Snakefile
  * Options relating to SLURM/Snakemake:
-   * **`$CLUSC_CONF`**: Path within container to file mapping rules to resource
+   * **`$CLUSTER_CONFIG`**: Path within container to file mapping rules to resource
      requirements
+   * `$CLUSTER_NAME`: Some HPCs define multiple SLURM clusters. In this case
+     you may need to specify the cluster using this environment variable.
    * `$NUM_JOBS`: Max jobs at the Snakemake level. Each may include many SLURM
      tasks. 128 by default.
    * `$SBATCH_DEFAULTS`: Default arguments to pass to sbatch
