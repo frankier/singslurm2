@@ -38,6 +38,10 @@ environment variables. Compulsory arguments are shown in **bold**:
      default.
    * `$LATENCY_WAIT`: The number of seconds to wait for a rule's output before
      concluding it has failed. 30 by default.
+ * Options relating to Snakemake/Singularity:
+   * `$SNAKEMAKE_HOST_SINGULARITY`: If set, the Snakemake instance within the
+     container will be patched to run Singularity from the host. This will also
+     pass `--use-singularity` to Snakemake.
  * Other options:
    * `$TRACE`: Trace the script -- useful for debugging
    * `$PRE_COORDINATOR_SCRIPT` and `$PRE_JOB_SCRIPT`: script fragments, typically

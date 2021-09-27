@@ -6,7 +6,7 @@ cp -r \
 cd slurmprofile
 
 sed -i \
-  's/import subprocess /import fake_subprocess /g' \
+  's/import subprocess/import fake_subprocess/g' \
   slurm-status.py \
   slurm_utils.py
 
@@ -52,3 +52,28 @@ cp $SCRIPTPATH/req_run.py .
 cp $SCRIPTPATH/fake_subprocess.py .
 
 cd ..
+
+# If we are asked to patch Snakemake within the container to use Singularity on the host
+
+if [[ -n "$SNAKEMAKE_HOST_SINGULARITY" ]]; then
+  mkdir snakemake_host_singularity
+  cd snakemake_host_singularity
+  PWD=$(pwd)
+
+  cat << 'GET_SNAKEMAKE_SINGULARITY_SCRIPT' > get-snakemake-singularity-script.sh
+TARGET=$(python -c 'import snakemake.deployment.singularity as s; print(s.__file__)')
+"cp" $TARGET ./snakemake_singularity_module.py && echo $TARGET
+GET_SNAKEMAKE_SINGULARITY_SCRIPT
+
+  chmod +x get-snakemake-singularity-script.sh
+  TARGET=$(singularity exec --bind $PWD $SIF_PATH $PWD/get-snakemake-singularity-script.sh)
+
+  sed -i 's/import subprocess/import fake_subprocess/g' snakemake_singularity_module.py
+
+  SING_EXTRA_ARGS="\
+--bind $tmp_dir/snakemake_host_singularity/snakemake_singularity_module.py:$TARGET \
+--bind $SCRIPTPATH/fake_subprocess.py:$(dirname $TARGET)/fake_subprocess.py \
+$SING_EXTRA_ARGS"
+  SNAKEMAKE_EXTRA_ARGS="--use-singularity $SNAKEMAKE_EXTRA_ARGS"
+  cd ..
+fi
