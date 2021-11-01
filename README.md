@@ -9,13 +9,19 @@ profile](https://github.com/Snakemake-Profiles/slurm) and
 
 ## Running
 
-First perform a **recursive** clone of this repository:
+Installation is performed by [download a packaged
+release](https://github.com/frankier/singslurm2/releases/) and then unzipping
+it.
+
+Assuming the latest release is `$VERSION`, you can run:
 
     $ cd ~
-    $ git clone --recursive https://github.com/frankier/singslurm2.git
+    $ wget https://github.com/frankier/singslurm2/releases/download/$VERSION/singslurm2.pkg.zip
+    $ unzip singslurm2.pkg.zip
 
-Then it can be run using `~/singslurm2/run.sh`. Arguments are passed using
-environment variables. Compulsory arguments are shown in **bold**:
+After performing these steps the entrypoint is `~/singslurm2/run.sh`. Arguments
+are passed using environment variables. Compulsory arguments are shown in
+**bold**:
 
  * Options relating to Singularity:
    * **`$SIF_PATH`**: Path to Singularity SIF file within which both the

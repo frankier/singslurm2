@@ -1,1 +1,0 @@
-singreqrun/coordinator.sh

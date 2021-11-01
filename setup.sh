@@ -1,14 +1,9 @@
 # Copy slurm profile
 cp -r \
-  "$SCRIPTPATH/../slurm-profile/{{cookiecutter.profile_name}}" \
+  "$SCRIPTPATH/slurm-profile" \
  slurmprofile
 
 cd slurmprofile
-
-sed -i \
-  's/import subprocess /import fake_subprocess /g' \
-  slurm-status.py \
-  slurm_utils.py
 
 # Configure via environment variables instead of cookiecutter
 cat << SETTINGSJSON > settings.json
@@ -35,20 +30,23 @@ cat << JOBSCRIPT > slurm-jobscript.sh
 #!/bin/bash
 # properties = {properties}
 
-if [[ -n "\$PRE_JOB_SCRIPT" ]]; then
-  eval "\$PRE_JOB_SCRIPT"
-fi
+# Skip since we are also executing the PRE_COORDINATOR_SCRIPT
+#if [[ -n "\$PRE_JOB_SCRIPT" ]]; then
+#  eval "\$PRE_JOB_SCRIPT"
+#fi
 
-cat << 'EXECJOB' | singularity shell \$SING_EXTRA_ARGS --nv $SIF_PATH
+NO_COORDINATOR_SETUP=1
+DEFAULT_HOST_PROGS="singularity"
+SCRIPTPATH="$SCRIPTPATH"
+
+. \$SCRIPTPATH/coordinator.sh
+
+cat << 'EXECJOB' | singularity shell \$SING_EXTRA_ARGS --bind \$tmp_dir/req_run/:/var/run/req_run --nv $SIF_PATH
+export PATH=/hostbin:\$PATH
 {exec_job}
 EXECJOB
 JOBSCRIPT
 
 chmod +x slurm-jobscript.sh
-
-# Symlink req_run.py so that it used instead of subprocess.py
-
-cp $SCRIPTPATH/req_run.py .
-cp $SCRIPTPATH/fake_subprocess.py .
 
 cd ..
