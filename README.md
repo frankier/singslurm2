@@ -7,6 +7,12 @@ The project integrates [the SLURM Snakemake
 profile](https://github.com/Snakemake-Profiles/slurm) and
 [singreqrun](https://github.com/frankier/singreqrun).
 
+`singslurm2` also supports spawning extra Singularity containers using
+[Snakemake's Singularity
+support](https://snakemake.readthedocs.io/en/v5.7.3/snakefiles/deployment.html#running-jobs-in-containers),
+however this requires Snakemake 6.10.0 and only rules written with the `shell`
+directive are supported.
+
 ## Running
 
 Installation is performed by [download a packaged
